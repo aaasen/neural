@@ -1,2 +1,2 @@
 
-Experiments with neural nets
+Experiments with neural networks
