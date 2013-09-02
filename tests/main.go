@@ -6,11 +6,15 @@ import (
 )
 
 func main() {
-	neuron, err := neural.NewNeuron([]float64{1, 2})
+	zero, _ := neural.NewNeuron([]float64{0, 0, 0})
+	identity, _ := neural.NewNeuron([]float64{1, 1, 1})
+	neuron, _ := neural.NewNeuron([]float64{1, 2, 3})
 
-	if err != nil {
-		fmt.Println(err)
-	}
+	layer := neural.NewLayer([]*neural.Neuron{
+		zero,
+		identity,
+		neuron,
+	})
 
-	fmt.Println(neuron.Score([]float64{1, 1}))
+	fmt.Println(layer.Score([]float64{1, 2, 3}))
 }
