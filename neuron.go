@@ -1,7 +1,7 @@
 package neural
 
 import (
-	"errors"
+	"log"
 )
 
 type Neuron struct {
@@ -14,17 +14,20 @@ func NewNeuron(weights []float64) (*Neuron, error) {
 	}, nil
 }
 
-func (neuron *Neuron) Score(inputs []float64) (float64, error) {
+func (neuron *Neuron) Score(inputs []float64) float64 {
 	if len(neuron.weights) != len(inputs) {
-		return 0, errors.New("wrong number of inputs for neuron")
+		log.Fatalf("wrong number of inputs for neuron: expected %i, got %i\n",
+			len(neuron.weights), len(inputs))
+		return 0
 	}
 
 	return dotProduct(inputs, neuron.weights)
 }
 
-func dotProduct(a, b []float64) (float64, error) {
+func dotProduct(a, b []float64) float64 {
 	if len(a) != len(b) {
-		return 0, errors.New("dot product only works on vectors of equal length")
+		log.Fatalf("dot product only works on vectors of equal length\n")
+		return 0
 	}
 
 	products := make([]float64, len(a))
@@ -33,7 +36,7 @@ func dotProduct(a, b []float64) (float64, error) {
 		products[i] = a[i] * b[i]
 	}
 
-	return sum(products), nil
+	return sum(products)
 }
 
 func sum(slice []float64) float64 {

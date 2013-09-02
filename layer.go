@@ -12,18 +12,12 @@ func NewLayer(neurons []*Neuron) *Layer {
 	}
 }
 
-func (layer *Layer) Score(inputs []float64) ([]float64, error) {
+func (layer *Layer) Score(inputs []float64) []float64 {
 	scores := make([]float64, len(inputs))
 
 	for i := 0; i < len(inputs); i++ {
-		score, err := layer.neurons[i].Score(inputs)
-
-		if err != nil {
-			return nil, err
-		}
-
-		scores[i] = score
+		scores[i] = layer.neurons[i].Score(inputs)
 	}
 
-	return scores, nil
+	return scores
 }
