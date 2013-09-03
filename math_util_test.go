@@ -4,6 +4,10 @@ import (
 	"testing"
 )
 
+func TestSigmoid(t *testing.T) {
+
+}
+
 func TestDotProduct(t *testing.T) {
 	expected := float64(2)
 	result := dotProduct([]float64{1, 2, 3}, []float64{-1, 0, 1})

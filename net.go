@@ -58,11 +58,22 @@ func (net *Net) Train(trainingSet *TrainingSet) {
 		    return the network
 	*/
 
+	rate := 0.04
+
 	for _, example := range trainingSet.examples {
 		output := net.Score(example.input)
 		err := calcError(example.output, output)
+		weightDelta := err * rate
 
 		fmt.Println(err)
+
+		for _, neuron := range net.layers[len(net.layers)-1].neurons {
+			for j, _ := range neuron.weights {
+				neuron.weights[j] += weightDelta
+			}
+		}
+
+		// fmt.Println(weightDelta)
 
 	}
 }

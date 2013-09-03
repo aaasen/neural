@@ -36,5 +36,5 @@ func (neuron *Neuron) Score(inputs []float64) float64 {
 		return 0
 	}
 
-	return dotProduct(inputs, neuron.weights)
+	return sigmoid(dotProduct(inputs, neuron.weights))
 }
