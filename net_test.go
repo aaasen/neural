@@ -1,7 +1,6 @@
 package neural
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -9,6 +8,9 @@ var zeroNeuron = NewNeuron([]float64{0, 0, 0})
 var identityNeuron = NewNeuron([]float64{1, 1, 1})
 var aNeuron = NewNeuron([]float64{1, 2, 3})
 var bNeuron = NewNeuron([]float64{-1, 0, 1})
+var cNeuron = NewNeuron([]float64{3, 4})
+var dNeuron = NewNeuron([]float64{-1, 1})
+var eNeuron = NewNeuron([]float64{1, 2})
 
 var aLayer = NewLayer([]*Neuron{
 	zeroNeuron,
@@ -21,7 +23,19 @@ var bLayer = NewLayer([]*Neuron{
 	bNeuron,
 })
 
+var cLayer = NewLayer([]*Neuron{
+	cNeuron,
+	dNeuron,
+	eNeuron,
+})
+
 var aNet = NewNet([]*Layer{
+	aLayer,
+	bLayer,
+})
+
+var bNet = NewNet([]*Layer{
+	cLayer,
 	aLayer,
 	bLayer,
 })
@@ -35,10 +49,13 @@ func TestNet(t *testing.T) {
 	}
 }
 
-func TestBP(t *testing.T) {
-	d := aNet.backPropogate([]float64{0, 0})
+func TestBackNet(t *testing.T) {
+	expected := []float64{26, 74}
+	result := bNet.Back([]float64{1, 2})[0]
 
-	fmt.Println(d)
+	if !equals(result, expected) {
+		t.Errorf("expected %v, got %v", expected, result)
+	}
 }
 
 func TestLayer(t *testing.T) {

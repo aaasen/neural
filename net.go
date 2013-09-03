@@ -1,7 +1,6 @@
 package neural
 
 import (
-	// "fmt"
 	"math"
 )
 
@@ -76,16 +75,18 @@ func (net *Net) Train(trainingSet *TrainingSet) {
 	}
 }
 
-func (net *Net) backPropogate(deltas []float64) []float64 {
-	// 	if len(net.layers) == 1 {
+func (net *Net) Back(deltas []float64) [][]float64 {
+	allDeltas := make([][]float64, len(net.layers))
 
-	// 	} else if len(net.layers) > 1 {
+	for i := len(net.layers) - 1; i >= 0; i-- {
+		if i == len(net.layers)-1 {
+			allDeltas[i] = net.layers[i].Back(deltas)
+		} else {
+			allDeltas[i] = net.layers[i].Back(allDeltas[i+1])
+		}
+	}
 
-	// 	} else {
-	// 		return []float64{0}
-	// 	}
-
-	return nil
+	return allDeltas
 }
 
 func calcError(expected, result []float64) float64 {
