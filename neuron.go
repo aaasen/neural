@@ -8,11 +8,13 @@ import (
 
 type Neuron struct {
 	weights []float64
+	delta   float64
 }
 
 func NewNeuron(weights []float64) *Neuron {
 	return &Neuron{
 		weights,
+		0.0,
 	}
 }
 
@@ -36,5 +38,15 @@ func (neuron *Neuron) Score(inputs []float64) float64 {
 		return 0
 	}
 
-	return sigmoid(dotProduct(inputs, neuron.weights))
+	return dotProduct(inputs, neuron.weights)
+}
+
+func (neuron *Neuron) Back(input float64) []float64 {
+	outs := make([]float64, len(neuron.weights))
+
+	for i, weight := range neuron.weights {
+		outs[i] = weight * input
+	}
+
+	return outs
 }

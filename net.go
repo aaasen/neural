@@ -1,7 +1,7 @@
 package neural
 
 import (
-	"fmt"
+	// "fmt"
 	"math"
 )
 
@@ -65,8 +65,6 @@ func (net *Net) Train(trainingSet *TrainingSet) {
 		err := calcError(example.output, output)
 		weightDelta := err * rate
 
-		fmt.Println(err)
-
 		for _, neuron := range net.layers[len(net.layers)-1].neurons {
 			for j, _ := range neuron.weights {
 				neuron.weights[j] += weightDelta
@@ -76,6 +74,18 @@ func (net *Net) Train(trainingSet *TrainingSet) {
 		// fmt.Println(weightDelta)
 
 	}
+}
+
+func (net *Net) backPropogate(deltas []float64) []float64 {
+	// 	if len(net.layers) == 1 {
+
+	// 	} else if len(net.layers) > 1 {
+
+	// 	} else {
+	// 		return []float64{0}
+	// 	}
+
+	return nil
 }
 
 func calcError(expected, result []float64) float64 {

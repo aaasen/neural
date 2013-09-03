@@ -1,6 +1,7 @@
 package neural
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -34,9 +35,24 @@ func TestNet(t *testing.T) {
 	}
 }
 
+func TestBP(t *testing.T) {
+	d := aNet.backPropogate([]float64{0, 0})
+
+	fmt.Println(d)
+}
+
 func TestLayer(t *testing.T) {
 	expected := []float64{0, 6, 14}
 	result := aLayer.Score([]float64{1, 2, 3})
+
+	if !equals(result, expected) {
+		t.Errorf("expected %v, got %v", expected, result)
+	}
+}
+
+func TestBackLayer(t *testing.T) {
+	expected := []float64{-1, 2, 5}
+	result := bLayer.Back([]float64{1, 2})
 
 	if !equals(result, expected) {
 		t.Errorf("expected %v, got %v", expected, result)
@@ -48,6 +64,15 @@ func TestNeuron(t *testing.T) {
 	result := aNeuron.Score([]float64{-1, 0, 1})
 
 	if expected != result {
+		t.Errorf("expected %f, got %f", expected, result)
+	}
+}
+
+func TestBackNeuron(t *testing.T) {
+	expected := []float64{2, 4, 6}
+	result := aNeuron.Back(2)
+
+	if !equals(expected, result) {
 		t.Errorf("expected %f, got %f", expected, result)
 	}
 }
