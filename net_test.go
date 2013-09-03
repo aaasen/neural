@@ -4,10 +4,10 @@ import (
 	"testing"
 )
 
-var zeroNeuron, _ = NewNeuron([]float64{0, 0, 0})
-var identityNeuron, _ = NewNeuron([]float64{1, 1, 1})
-var aNeuron, _ = NewNeuron([]float64{1, 2, 3})
-var bNeuron, _ = NewNeuron([]float64{-1, 0, 1})
+var zeroNeuron = NewNeuron([]float64{0, 0, 0})
+var identityNeuron = NewNeuron([]float64{1, 1, 1})
+var aNeuron = NewNeuron([]float64{1, 2, 3})
+var bNeuron = NewNeuron([]float64{-1, 0, 1})
 
 var aLayer = NewLayer([]*Neuron{
 	zeroNeuron,
