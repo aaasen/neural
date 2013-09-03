@@ -29,5 +29,5 @@ func (layer *Layer) Score(inputs []float64) []float64 {
 		scores[i] = layer.neurons[i].Score(inputs)
 	}
 
-	return normal(scores)
+	return scores
 }

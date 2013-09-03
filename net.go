@@ -16,10 +16,10 @@ func RandomNet(numInputs, numLayers, numOutputs int) *Net {
 	layers := make([]*Layer, numLayers)
 
 	for i := range layers {
-		if i == 0 {
+		if i == len(layers)-1 {
 			layers[i] = RandomLayer(numInputs, numOutputs)
 		} else {
-			layers[i] = RandomLayer(numOutputs, numOutputs)
+			layers[i] = RandomLayer(numInputs, numInputs)
 		}
 	}
 
@@ -36,4 +36,8 @@ func (net *Net) Score(inputs []float64) []float64 {
 	} else {
 		return []float64{0}
 	}
+}
+
+func (net *Net) Train(trainingSet *TrainingSet) {
+
 }

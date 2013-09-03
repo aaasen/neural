@@ -3,9 +3,9 @@ package neural
 import ()
 
 type TrainingSet struct {
-	examples []Example
+	examples []*Example
 }
 
-func NewTrainingSet(examples []Example) *TrainingSet {
+func NewTrainingSet(examples []*Example) *TrainingSet {
 	return &TrainingSet{examples}
 }
