@@ -3,6 +3,7 @@ package neural
 import (
 	"log"
 	"math/rand"
+	"time"
 )
 
 type Neuron struct {
@@ -17,6 +18,9 @@ func NewNeuron(weights []float64) *Neuron {
 
 func RandomNeuron(numInputs int) *Neuron {
 	weights := make([]float64, numInputs)
+
+	rand.Seed(time.Now().UnixNano())
+	rand.Float64()
 
 	for i := range weights {
 		weights[i] = rand.Float64()

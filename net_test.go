@@ -26,7 +26,7 @@ var aNet = NewNet([]*Layer{
 })
 
 func TestNet(t *testing.T) {
-	expected := []float64{54, 14}
+	expected := []float64{1, 0}
 	result := aNet.Score([]float64{1, 2, 3})
 
 	if !equals(result, expected) {
@@ -35,7 +35,7 @@ func TestNet(t *testing.T) {
 }
 
 func TestLayer(t *testing.T) {
-	expected := []float64{0, 6, 14}
+	expected := []float64{0, 0.42857142857142855, 1}
 	result := aLayer.Score([]float64{1, 2, 3})
 
 	if !equals(result, expected) {
